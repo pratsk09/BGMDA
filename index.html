@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="BGMDA is a local nonprofit raising awareness for muscular dystrophy and supporting students affected by it." />
+  <title>BGMDA | Buffalo Grove Muscular Dystrophy Awareness</title>
+  <link rel="icon" href="assets/bgmda-ribbon.png" />
+
+  <style>
+    :root {
+      --green: #19b851;
+      --green-dark: #087b37;
+      --green-soft: #eafaf0;
+      --blue: #1377d4;
+      --blue-dark: #073b72;
+      --blue-soft: #eef7ff;
+      --white: #ffffff;
+      --page: #f8fcff;
+      --text: #1c2a39;
+      --muted: #5f7085;
+      --line: #dceaf7;
+      --shadow: 0 22px 55px rgba(7, 59, 114, 0.12);
+      --radius: 28px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(25, 184, 81, 0.12), transparent 32%),
+        radial-gradient(circle at 90% 5%, rgba(19, 119, 212, 0.12), transparent 30%),
+        linear-gradient(180deg, #ffffff 0%, var(--page) 55%, #f1fbf5 100%);
+      line-height: 1.6;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: 0 auto;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 16px;
+      background: var(--blue-dark);
+      color: white;
+      padding: 12px 16px;
+      border-radius: 12px;
+      z-index: 100;
+    }
+
+    .skip-link:focus {
+      top: 16px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      min-height: 78px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--blue-dark);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .brand img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+    }
+
+    .brand-title {
+      display: block;
+      font-size: 1.1rem;
+      line-height: 1.05;
+    }
+
+    .brand-subtitle {
+      display: block;
+      color: var(--muted);
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0;
+      margin-top: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: var(--blue-dark);
+      font-weight: 800;
+      font-size: 0.96rem;
+    }
+
+    .nav-links a {
+      position: relative;
+      padding: 8px 0;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--green), var(--blue));
+      transition: width 0.2s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 999px;
+      padding: 13px 22px;
+      border: 0;
+      font: inherit;
+      font-weight: 900;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-primary {
+      color: white;
+      background: linear-gradient(135deg, var(--green), var(--blue));
+      box-shadow: 0 14px 28px rgba(19, 119, 212, 0.2);
+    }
+
+    .button-secondary {
+      color: var(--blue-dark);
+      background: white;
+      border: 1px solid var(--line);
+      box-shadow: 0 10px 25px rgba(7, 59, 114, 0.08);
+    }
+
+    main {
+      overflow: hidden;
+    }
+
+    .hero {
+      padding: 82px 0 58px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 52px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 18px;
+      border: 1px solid #bdeecb;
+      background: var(--green-soft);
+      color: var(--green-dark);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.86rem;
+      font-weight: 900;
+    }
+
+    h1 {
+      color: var(--blue-dark);
+      font-size: clamp(2.7rem, 6vw, 5rem);
+      line-height: 0.98;
+      letter-spacing: -0.06em;
+      margin-bottom: 22px;
+    }
+
+    .hero-text {
+      max-width: 660px;
+      color: var(--muted);
+      font-size: 1.16rem;
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .hero-logo-card {
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid var(--line);
+      border-radius: 36px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .hero-logo-card img {
+      width: min(390px, 100%);
+      border-radius: 26px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    section {
+      padding: 72px 0;
+    }
+
+    .section-heading {
+      max-width: 760px;
+      margin-bottom: 34px;
+    }
+
+    .section-heading.center {
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+
+    h2 {
+      color: var(--blue-dark);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      margin-bottom: 14px;
+    }
+
+    .section-heading p,
+    .muted {
+      color: var(--muted);
+      font-size: 1.06rem;
+    }
+
+    .mission-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: center;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 34px;
+    }
+
+    .mission-card h3,
+    .action-info h3,
+    .form-card h3,
+    .learn-card h3,
+    .member-info h3 {
+      color: var(--blue-dark);
+    }
+
+    .mission-card h3 {
+      font-size: 1.55rem;
+      margin-bottom: 12px;
+    }
+
+    .mission-card p {
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      background: var(--blue-soft);
+      color: var(--blue-dark);
+      padding: 9px 13px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 900;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .member-card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: white;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .member-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 30px 70px rgba(7, 59, 114, 0.16);
+    }
+
+    .member-photo {
+      height: 370px;
+      background: linear-gradient(135deg, var(--green-soft), var(--blue-soft));
+      overflow: hidden;
+    }
+
+    .member-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    .member-info {
+      padding: 22px;
+    }
+
+    .member-info h3 {
+      font-size: 1.28rem;
+      margin-bottom: 4px;
+    }
+
+    .role {
+      color: var(--green-dark);
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    .member-info p {
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .learn-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .learn-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 26px;
+    }
+
+    .learn-card h3 {
+      font-size: 1.24rem;
+      margin-bottom: 10px;
+    }
+
+    .learn-card p {
+      color: var(--muted);
+    }
+
+    .source-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .source-links a {
+      color: var(--blue-dark);
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-weight: 900;
+      box-shadow: 0 10px 20px rgba(7, 59, 114, 0.06);
+    }
+
+    .action-wrap {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 30px;
+      align-items: start;
+    }
+
+    .action-info,
+    .form-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 30px;
+    }
+
+    .action-info h3,
+    .form-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+    }
+
+    .action-info p {
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    form {
+      display: grid;
+      gap: 15px;
+    }
+
+    label {
+      display: block;
+      color: var(--blue-dark);
+      font-weight: 900;
+      font-size: 0.94rem;
+      margin-bottom: 7px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      border: 1px solid #cae2fb;
+      border-radius: 16px;
+      background: #fbfdff;
+      color: var(--text);
+      padding: 14px 15px;
+      font: inherit;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 4px rgba(19, 119, 212, 0.12);
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .form-note {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 12px;
+    }
+
+    footer {
+      background: var(--blue-dark);
+      color: white;
+      padding: 42px 0;
+      margin-top: 42px;
+    }
+
+    .footer-grid {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .footer-brand img {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+      background: white;
+      border-radius: 13px;
+      padding: 4px;
+    }
+
+    footer p {
+      color: #d7e9ff;
+      max-width: 660px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-weight: 900;
+    }
+
+    .footer-links a:hover {
+      color: #86efac;
+    }
+
+    @media (max-width: 920px) {
+      .hero-grid,
+      .mission-card,
+      .action-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .team-grid,
+      .learn-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 14px 0;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+
+      .member-photo {
+        height: 430px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .hero {
+        padding-top: 50px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .brand-subtitle {
+        display: none;
+      }
+
+      .member-photo {
+        height: 340px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#about" aria-label="BGMDA home">
+        <img src="assets/bgmda-ribbon.png" alt="BGMDA ribbon logo" />
+        <span>
+          <span class="brand-title">BGMDA</span>
+          <span class="brand-subtitle">Buffalo Grove Muscular Dystrophy Awareness</span>
+        </span>
+      </a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#about">About Us</a>
+        <a href="#team">Team</a>
+        <a href="#learn">Learn</a>
+        <a href="#take-action">Take Action</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="about">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Local nonprofit awareness organization</div>
+          <h1>Raising awareness for BGMDA.</h1>
+          <p class="hero-text">
+            BGMDA is a local nonprofit started by students in Buffalo Grove. Our goal is to raise awareness for muscular dystrophy and support students affected by it through education, outreach, and community action.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#take-action">Join Our Email List</a>
+            <a class="button button-secondary" href="#learn">Learn About BGMDA</a>
+          </div>
+        </div>
+
+        <div class="hero-logo-card">
+          <img src="assets/bgmda-logo.png" alt="BGMDA full logo" />
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="mission-heading">
+      <div class="container mission-card">
+        <div>
+          <h2 id="mission-heading">Our mission</h2>
+          <p>
+            We are working to build a more informed and supportive community for students and families affected by muscular dystrophy.
+          </p>
+          <p>
+            Through student-led events, awareness campaigns, and educational outreach, BGMDA helps people understand what muscular dystrophy is and why support matters.
+          </p>
+        </div>
+
+        <div>
+          <h3>What we focus on</h3>
+          <div class="pill-list" aria-label="BGMDA focus areas">
+            <span class="pill">Awareness</span>
+            <span class="pill">Education</span>
+            <span class="pill">Student support</span>
+            <span class="pill">Community outreach</span>
+            <span class="pill">Volunteering</span>
+            <span class="pill">Fundraising</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="team">
+      <div class="container">
+        <div class="section-heading center">
+          <h2>Meet our team</h2>
+          <p>
+            BGMDA is led by students who want to make a difference in their local community.
+          </p>
+        </div>
+
+        <div class="team-grid">
+          <article class="member-card">
+            <div class="member-photo">
+              <img src="assets/samrudth.jpg" alt="Samrudth Goporagu" />
+            </div>
+            <div class="member-info">
+              <h3>Samrudth Goporagu</h3>
+              <div class="role">Founder</div>
+              <p>Leads the vision for BGMDA and helps organize the group’s awareness and outreach efforts.</p>
+            </div>
+          </article>
+
+          <article class="member-card">
+            <div class="member-photo">
+              <img src="assets/pratyush.jpg" alt="Pratyush Kumar" />
+            </div>
+            <div class="member-info">
+              <h3>Pratyush Kumar</h3>
+              <div class="role">Co-Founder</div>
+              <p>Supports BGMDA’s growth, outreach planning, and student-led awareness work.</p>
+            </div>
+          </article>
+
+          <article class="member-card">
+            <div class="member-photo">
+              <img src="assets/wesely.jpg" alt="Wesely Deheck" />
+            </div>
+            <div class="member-info">
+              <h3>Wesely Deheck</h3>
+              <div class="role">Director of Operations</div>
+              <p>Helps coordinate operations, planning, and communication for BGMDA activities.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="learn">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Learn about BGMDA</h2>
+          <p>
+            BGMDA stands for Buffalo Grove Muscular Dystrophy Awareness. Our organization focuses on helping more people understand muscular dystrophy and how it can affect students, families, and communities.
+          </p>
+        </div>
+
+        <div class="learn-grid">
+          <article class="learn-card">
+            <h3>What is muscular dystrophy?</h3>
+            <p>
+              Muscular dystrophy refers to a group of conditions that cause muscles to become weaker over time. It can affect movement, independence, and daily life.
+            </p>
+          </article>
+
+          <article class="learn-card">
+            <h3>Why awareness matters</h3>
+            <p>
+              Awareness helps students and community members become more understanding, supportive, and informed about the challenges people affected by muscular dystrophy may face.
+            </p>
+          </article>
+
+          <article class="learn-card">
+            <h3>How BGMDA helps</h3>
+            <p>
+              BGMDA works to spread information, support students, organize outreach, and encourage community involvement.
+            </p>
+          </article>
+        </div>
+
+        <div class="source-links" aria-label="Helpful resources">
+          <a href="https://www.mda.org/" target="_blank" rel="noreferrer">Muscular Dystrophy Association</a>
+          <a href="https://www.cdc.gov/muscular-dystrophy/about/index.html" target="_blank" rel="noreferrer">CDC Muscular Dystrophy Overview</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="take-action">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Take action</h2>
+          <p>
+            Join our email list to hear about future BGMDA meetings, volunteer opportunities, awareness events, and ways to help.
+          </p>
+        </div>
+
+        <div class="action-wrap">
+          <div class="action-info">
+            <h3>Ways to get involved</h3>
+            <p>You can support BGMDA by joining our email list, attending events, helping with outreach, volunteering, or sharing our mission with others.</p>
+            <p>We are looking for students and community members who care about awareness, service, and helping others.</p>
+          </div>
+
+          <div class="form-card">
+            <h3>Email sign-up</h3>
+
+            <!--
+              GitHub Pages makes your website public, but it does not collect form submissions.
+              To make this form work, create a free Formspree form and replace YOUR_FORM_ID below.
+              Example: https://formspree.io/f/abcdwxyz
+            -->
+            <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+              <div>
+                <label for="name">Full name</label>
+                <input id="name" name="name" type="text" placeholder="Your name" required />
+              </div>
+
+              <div>
+                <label for="email">Email address</label>
+                <input id="email" name="email" type="email" placeholder="you@example.com" required />
+              </div>
+
+              <div>
+                <label for="interest">How would you like to help?</label>
+                <select id="interest" name="interest" required>
+                  <option value="">Select one</option>
+                  <option value="Join email list">Join the email list</option>
+                  <option value="Volunteer">Volunteer</option>
+                  <option value="Help with outreach">Help with outreach</option>
+                  <option value="Attend events">Attend events</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="Optional message"></textarea>
+              </div>
+
+              <button class="button button-primary" type="submit">Submit</button>
+              <p class="form-note">Before publishing, replace <strong>YOUR_FORM_ID</strong> with your real form endpoint.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="assets/bgmda-ribbon.png" alt="" />
+          <strong>BGMDA</strong>
+        </div>
+        <p>A local nonprofit raising awareness for muscular dystrophy and supporting students affected by it.</p>
+      </div>
+
+      <div class="footer-links">
+        <a href="#about">About</a>
+        <a href="#team">Team</a>
+        <a href="#learn">Learn</a>
+        <a href="#take-action">Take Action</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
